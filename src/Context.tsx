@@ -1,3 +1,4 @@
+import { CssBaseline } from "@material-ui/core";
 import React, { useReducer } from "react";
 import App from "./App";
 
@@ -41,15 +42,18 @@ function CustContextProvider(props: any) {
   }
 
   return (
-    <AppContext.Provider
-      value={{
-        notebook: state.notebook,
-        setNotebook,
-      }}
-      {...props}
-    >
-      <App />
-    </AppContext.Provider>
+    <React.StrictMode>
+      <CssBaseline />
+      <AppContext.Provider
+        value={{
+          notebook: state.notebook,
+          setNotebook,
+        }}
+        {...props}
+      >
+        <App />
+      </AppContext.Provider>
+    </React.StrictMode>
   );
 }
 
