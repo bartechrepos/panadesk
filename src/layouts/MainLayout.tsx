@@ -19,6 +19,8 @@ const useStyles = makeStyles((theme: Theme) =>
     toolbar: theme.mixins.toolbar,
     content: {
       padding: theme.spacing(3),
+      width: "100%",
+      backgroundColor: "#efe",
     },
   })
 );

@@ -5,6 +5,8 @@ import DeliveryNotes from "./pages/DeliveryNotes";
 
 import { ThemeProvider, createMuiTheme } from "@material-ui/core";
 import { blue, teal } from "@material-ui/core/colors";
+import DeliverynoteDetails from "./pages/DeliverynoteDetails";
+import EmpLogin from "./pages/EmpLogin";
 
 const theme = createMuiTheme({
   direction: "rtl",
@@ -33,6 +35,8 @@ function App() {
         <Router>
           <MainLayout>
             <Route exact path="/" component={DeliveryNotes} />
+            <Route exact path="/dn_details" component={DeliverynoteDetails} />
+            <Route exact path="/login" component={EmpLogin} />
           </MainLayout>
         </Router>
       </ThemeProvider>
