@@ -57,6 +57,10 @@ export default function DeliveryNotes() {
       if (resp.status === 200) setDeliveryNotes(resp.data);
     };
     fetchData();
+    const intervalId = setInterval(() => {
+      fetchData();
+    }, 4000);
+    return () => clearInterval(intervalId);
   }, []);
 
   if (userData)

@@ -5,6 +5,8 @@ export type DeliveryNoteType = {
   serial: number;
   created_at: string;
   updated_at: string;
+  booked_by: UserType;
+  reviewed_by: UserType;
 };
 
 export type DeliverynoteStatusType = {
@@ -36,7 +38,7 @@ export type UserType = {
 
 export type UsertypeType = {
   id: number;
-  stype: number;
+  step: number;
   arname: string;
   name: string;
 };

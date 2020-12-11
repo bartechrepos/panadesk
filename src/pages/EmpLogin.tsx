@@ -31,14 +31,17 @@ export default function EmpLogin() {
         <Button
           variant="contained"
           onClick={async () => {
-            console.log(empSerial);
             let resp = await Axios(
               `${config.API_URL}/employees?serial=${empSerial}`
             );
             if (resp.status === 200 && (resp.data as UserType[]).length) {
               let [respUser] = resp.data as UserType[];
-              setUserData(respUser);
-              history.push("/");
+              if (respUser.user_type.step > 1) {
+                setUserData(respUser);
+                history.push("/");
+              } else {
+                alert("ليس من صلاحياتك الدخول لبرنامج ادارة الاذون");
+              }
             }
           }}
         >

@@ -16,6 +16,15 @@ import { AppContext } from "../Context";
 import { DeliverynoteDetailsType } from "../utils/Types";
 
 import { createStyles, makeStyles, Theme } from "@material-ui/core/styles";
+import Timeline from "@material-ui/lab/Timeline";
+import TimelineItem from "@material-ui/lab/TimelineItem";
+import {
+  TimelineConnector,
+  TimelineContent,
+  TimelineDot,
+  TimelineOppositeContent,
+  TimelineSeparator,
+} from "@material-ui/lab";
 
 const useStyles = makeStyles((theme: Theme) =>
   createStyles({
@@ -23,6 +32,11 @@ const useStyles = makeStyles((theme: Theme) =>
       width: "100%",
       maxWidth: 660,
       backgroundColor: theme.palette.background.paper,
+    },
+    timeline: {
+      display: "flex",
+      justifyContent: "center",
+      maxWidth: 450,
     },
   })
 );
@@ -46,7 +60,13 @@ export default function DeliverynoteDetails() {
     <>
       <Box
         px={2}
-        style={{ backgroundColor: deliveryNote?.deliverynote_status?.hexcode }}
+        style={{
+          backgroundColor: deliveryNote?.deliverynote_status?.hexcode,
+          maxWidth: 350,
+          justifyContent: "center",
+          textAlign: "center",
+          borderRadius: 15,
+        }}
       >
         <Typography variant="h6">
           {" "}
@@ -76,6 +96,63 @@ export default function DeliverynoteDetails() {
             </ListItem>
           ))}
         </List>
+      </Box>
+      <Box className={classes.timeline}>
+        <Timeline align="alternate">
+          <TimelineItem>
+            <TimelineOppositeContent></TimelineOppositeContent>
+            <TimelineSeparator>
+              <TimelineDot />
+              <TimelineConnector />
+            </TimelineSeparator>
+            <TimelineContent>
+              <Typography> تم الانشاء</Typography>
+            </TimelineContent>
+          </TimelineItem>
+          {deliveryNote.booked_by && (
+            <TimelineItem>
+              <TimelineOppositeContent>
+                <Typography color="textSecondary">
+                  بواسطة {deliveryNote.booked_by.arname}
+                </Typography>
+              </TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineDot />
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent>
+                <Typography>تم الحجز</Typography>
+              </TimelineContent>
+            </TimelineItem>
+          )}
+          {deliveryNote.reviewed_by && (
+            <TimelineItem>
+              <TimelineOppositeContent>
+                <Typography color="textSecondary">
+                  بواسطة : {deliveryNote.reviewed_by.arname}
+                </Typography>
+              </TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineDot />
+                <TimelineConnector />
+              </TimelineSeparator>
+              <TimelineContent>
+                <Typography> المراجعة</Typography>
+              </TimelineContent>
+            </TimelineItem>
+          )}
+          {deliveryNote.deliverynote_status?.status_name === "Approved" && (
+            <TimelineItem>
+              <TimelineOppositeContent></TimelineOppositeContent>
+              <TimelineSeparator>
+                <TimelineDot />
+              </TimelineSeparator>
+              <TimelineContent>
+                <Typography>تمت الموافقة</Typography>
+              </TimelineContent>
+            </TimelineItem>
+          )}
+        </Timeline>
       </Box>
     </>
   );
